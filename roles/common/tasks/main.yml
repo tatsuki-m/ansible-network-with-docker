@@ -4,9 +4,6 @@
 - name: Upgrade packages.
   apt: upgrade=dist
 
-- name: Remove unused dependency packages.
-  apt: autoremove=yes
-
 - name: Allow port forwarding
   replace:
     dest: /etc/sysctl.conf
