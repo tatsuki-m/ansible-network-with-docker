@@ -1,0 +1,46 @@
+---
+- name: Check kernel version.
+  fail: msg="kernel {{ ansible_kernel }} is not supported."
+  when: "ansible_kernel | version_compare('3.10'. '<')"
+
+- name: Install packages, which enables to work with https.
+  apt: name={{ item }} state=present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - git
+
+- name: Add docker pgpg key.
+  apt_key: keyserver={{ keyserver }} id={{ keys }} state=present
+
+- name: Add docker.list file.
+  template: src=docker.list.j2 dest=/etc/apt/sources.list.d/docker.list owner=root group=root mod=0644
+
+- name: Update packages.
+  apt: update_cache=yes
+
+- name: Upgrage packages.
+  apt: upgrade=yes update_cache=yes
+
+- name: Remove lxc-docker
+  apt: name=lxc-docker state=absent
+
+- name: Install recommend packages for ubuntu Xenial.
+  apt: name={{ item }} state=present
+  with_items:
+    - linux-image-extra-{{ ansible_kernel }}
+    - linux-image-extra-virtual
+- name: Install docker-engine
+  apt: name=docker-engine state=present
+  notify:
+    - restart docker
+
+- name: Set docker service to start on boot.
+  service: name=docker enabled=yes
+
+- name: Add docker group.
+  group: name=docker gid={{ docker.gid }}
+
+- name: Append docker group to user.
+  user: name={{ docker.user }} groups=docker append=yes
+
