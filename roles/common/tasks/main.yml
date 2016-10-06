@@ -1,13 +1,13 @@
-- name: apt update
+- name: Update packages.
   apt: update_cache=yes
 
-- name: apt upgrade
+- name: Upgrade packages.
   apt: upgrade=dist
 
-- name: apt autoremove: remove unused dependency packages
+- name: Remove unused dependency packages.
   apt: autoremove=yes
 
-- name: allow port forwarding
+- name: Allow port forwarding
   replace:
     dest: /etc/sysctl.conf
     regexp: '^#net.ipv4.ip_forward=1'
