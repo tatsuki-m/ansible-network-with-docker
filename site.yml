@@ -1,6 +1,3 @@
+---
 -include: cloud-servers.yml
--include: core-edge-servers.yml
--include: edge-servers.yml
--include: client.yml
-
 
