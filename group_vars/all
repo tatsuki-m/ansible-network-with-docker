@@ -1,6 +1,6 @@
 ---
 # network interface path
-net_setting_path: /etc/network/interfaces
+net_cnf_path: /etc/network/interfaces
 
 # bridge
 br_ip:
