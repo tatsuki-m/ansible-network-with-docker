@@ -1,0 +1,24 @@
+---
+# bridge
+internal01: 192.168.1.0
+internal12: 192.168.2.0
+internal23: 192.168.3.0
+
+# network
+ifname0: "ens8"
+ifname1: "ens9"
+netmask: 255.255.255.0
+
+# each network address
+ip_addr:
+  cloud:
+    ifname1: 192.168.1.1
+  core-edge:
+    ifname0: 192.168.1.2
+    ifname1: 192.168.2.1
+  edge:
+    ifname0: 192.168.2.2
+    ifname1: 192.168.3.1
+  client:
+    ifname0: 192.168.3.2
+
