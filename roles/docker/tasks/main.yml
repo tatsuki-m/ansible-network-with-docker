@@ -1,8 +1,4 @@
 ---
-- name: Check kernel version.
-  fail: msg="kernel {{ ansible_kernel }} is not supported."
-  when: "ansible_kernel | version_compare('3.10'. '<')"
-
 - name: Install packages, which enables to work with https.
   apt: name={{ item }} state=present
   with_items:
@@ -14,13 +10,14 @@
   apt_key: keyserver={{ keyserver }} id={{ keys }} state=present
 
 - name: Add docker.list file.
-  template: src=docker.list.j2 dest=/etc/apt/sources.list.d/docker.list owner=root group=root mod=0644
+  template: src=docker.list.j2
+            dest=/etc/apt/sources.list.d/docker.list
 
 - name: Update packages.
   apt: update_cache=yes
 
 - name: Upgrage packages.
-  apt: upgrade=yes update_cache=yes
+  apt: upgrade=dist
 
 - name: Remove lxc-docker
   apt: name=lxc-docker state=absent
