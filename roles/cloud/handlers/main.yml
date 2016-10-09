@@ -1,0 +1,4 @@
+---
+- name: restart cloud network
+  shell: "ifdown {{ ifname1 }} && ifup {{ ifname1 }}"
+

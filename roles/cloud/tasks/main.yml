@@ -1,0 +1,22 @@
+---
+- name: insert bridge in /etc/network/interfaces
+  blockinfile:
+    dest: /etc/network/interfaces
+    content: |
+      iface {{ ifname1 }} inet static
+      address {{ ip_addr.cloud.ifname1 }}
+      netmask {{ netmask }}
+
+- name: add route from cloud to core-edge
+  lineinfile:
+    dest: /etc/network/interfaces
+    line: up route add -net {{ br_ip.internal12 }} netmask {{ netmask }} gw {{ ip_addr.core_edge.ifname0 }}
+
+- name: add route from cloud to client
+  lineinfile:
+    dest: /etc/network/interfaces
+    line: up route add -net {{ br_ip.internal23 }} netmask {{ netmask }} gw {{ ip_addr.core_edge.ifname0 }}
+
+- name: restart network
+  shell: "ifdown {{ ifname1 }} && ifup {{ ifname1 }}"
+
