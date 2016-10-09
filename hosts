@@ -1,2 +1,5 @@
 [cloud-servers]
 10.0.0.100
+
+[core-edge-servers]
+10.0.0.226

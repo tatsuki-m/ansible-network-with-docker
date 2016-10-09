@@ -1,0 +1,10 @@
+---
+# This playbook deploys the core-edge server
+
+- name: edge servers
+  hosts: edge-servers
+  become: yes
+
+  roles:
+    - common
+    - docker
