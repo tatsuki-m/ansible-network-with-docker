@@ -7,5 +7,5 @@ image or photo...
 ## How to debug
 ```bash
 # use password not public key cryptosystem
-$ vim ansible-playbook -i hosts site.yml --check --ask-pass --ask-become-pass
+$ ansible-playbook -i hosts site.yml --check --ask-pass --ask-become-pass
 ```
