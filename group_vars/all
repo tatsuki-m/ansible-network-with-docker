@@ -1,0 +1,34 @@
+---
+# network interface path
+net_cnf_path: /etc/network/interfaces
+
+# bridge
+br_ip:
+  internal01: 192.168.1.0
+  internal12: 192.168.2.0
+  internal23: 192.168.3.0
+
+# [variable] bridge mac address
+br_mac:
+  internal01: fe:54:00:03:e8:c2
+  internal12: 0a:2c:f8:f2:a9:4b
+  internal23: 1e:b6:41:91:5a:af
+
+# network
+ifname0: ens8
+ifname1: ens9
+netmask: 255.255.255.0
+
+# each network address
+ip_addr:
+  cloud:
+    ifname1: 192.168.1.1
+  core_edge:
+    ifname0: 192.168.1.2
+    ifname1: 192.168.2.1
+  edge:
+    ifname0: 192.168.2.2
+    ifname1: 192.168.3.1
+  client:
+    ifname0: 192.168.3.2
+

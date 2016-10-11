@@ -1,0 +1,34 @@
+---
+- name: insert bridge in /etc/network/interfaces
+  blockinfile:
+    dest: /etc/network/interfaces
+    content: |
+      auto {{ ifname1 }}
+      iface {{ ifname1 }} inet static
+      address {{ ip_addr.cloud.ifname1 }}
+      netmask {{ netmask }}
+
+- name: add route from cloud to edge
+  lineinfile:
+    dest: /etc/network/interfaces
+    line: up route add -net {{ br_ip.internal12 }} netmask {{ netmask }} gw {{ ip_addr.core_edge.ifname0 }}
+
+- name: add route from cloud to client
+  lineinfile:
+    dest: /etc/network/interfaces
+    line: up route add -net {{ br_ip.internal23 }} netmask {{ netmask }} gw {{ ip_addr.core_edge.ifname0 }}
+
+- name: add other hosts to /etc/hosts
+  blockinfile:
+    dest: /etc/hosts
+    content: |
+      {{ ip_addr.core_edge.ifname0 }}   core-edge
+      {{ ip_addr.edge.ifname0 }}   edge
+      {{ ip_addr.client.ifname0 }}   client
+
+- name: change hostname
+  command: hostnamectl set-hostname cloud
+
+- name: restart network
+  shell: "ifdown {{ ifname1 }} && ifup {{ ifname1 }}"
+

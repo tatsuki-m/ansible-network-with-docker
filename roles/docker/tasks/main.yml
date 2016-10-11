@@ -16,7 +16,7 @@
 - name: Update packages.
   apt: update_cache=yes
 
-- name: Upgrage packages.
+- name: Upgrade packages.
   apt: upgrade=dist
 
 - name: Remove lxc-docker
@@ -27,6 +27,7 @@
   with_items:
     - linux-image-extra-{{ ansible_kernel }}
     - linux-image-extra-virtual
+
 - name: Install docker-engine
   apt: name=docker-engine state=present
   notify:
