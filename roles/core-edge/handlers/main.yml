@@ -1,0 +1,4 @@
+---
+- name: restart core-edge network with ifname0
+  shell: "ifdown {{ ifname0 }} && ifup {{ ifname0 }}"
+

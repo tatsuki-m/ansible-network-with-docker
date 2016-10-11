@@ -1,0 +1,24 @@
+---
+- name: insert bridge with ifname0 in /etc/network/interfaces
+  blockinfile:
+    dest: /etc/network/interfaces
+    content: |
+      auto {{ ifname0 }}
+      iface {{ ifname0 }} inet static
+      address {{ ip_addr.core_edge.ifname0 }}
+      netmask {{ netmask }}
+
+- name: add other hosts to /etc/hosts
+  blockinfile:
+    dest: /etc/hosts
+    content: |
+      {{ ip_addr.cloud.ifname0 }}   cloud
+      {{ ip_addr.edge.ifname0 }}   edge
+      {{ ip_addr.client.ifname0 }}   client
+
+- name: change hostname
+  command: hostnamectl set-hostname core-edge
+
+- name: restart network
+  shell: "ifdown {{ ifname0 }} && ifup {{ ifname0 }}"
+
