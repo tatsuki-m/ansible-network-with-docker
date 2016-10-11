@@ -1,0 +1,6 @@
+---
+- name: restart network with ifname0
+  shell: "ifdown {{ ifname0 }} && ifup {{ ifname0 }}"
+
+- name: restart network with ifname1
+  shell: "ifdown {{ ifname1 }} && ifup {{ ifname1 }}"
