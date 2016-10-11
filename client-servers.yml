@@ -1,0 +1,10 @@
+---
+# This playbook deploys the cloud server
+
+- name: client servers
+  hosts: client-servers
+  become: yes
+
+  roles:
+    - common
+    - client
