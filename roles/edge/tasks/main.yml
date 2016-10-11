@@ -30,7 +30,7 @@
     dest: /etc/hosts
     content: |
       {{ ip_addr.cloud.ifname1 }}   cloud
-      {{ ip_addr.core-edge.ifname1 }}   core-edge
+      {{ ip_addr.core_edge.ifname1 }}   core-edge
       {{ ip_addr.client.ifname0 }}   client
 
 - name: change hostname
