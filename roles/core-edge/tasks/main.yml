@@ -8,6 +8,23 @@
       address {{ ip_addr.core_edge.ifname0 }}
       netmask {{ netmask }}
 
+- name: insert bridge with ifname1 in /etc/network/interfaces
+  blockinfile:
+    dest: /etc/network/interfaces
+    content: |
+      auto {{ ifname1 }}
+      iface {{ ifname1 }} inet static
+      address {{ ip_addr.core_edge.ifname1 }}
+      netmask {{ netmask }}
+
+- name: add route from edge-cloud to client
+    lineinfile:
+      dest: /etc/network/interfaces
+      line: up route add -net {{ br_ip.internal23 }} netmask {{ netmask }} gw {{ ip_addr.edge.ifname0 }}
+    notify:
+      restart network with ifname0
+      restart network with ifname1
+
 - name: add other hosts to /etc/hosts
   blockinfile:
     dest: /etc/hosts
@@ -18,7 +35,4 @@
 
 - name: change hostname
   command: hostnamectl set-hostname core-edge
-
-- name: restart network
-  shell: "ifdown {{ ifname0 }} && ifup {{ ifname0 }}"
 
