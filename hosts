@@ -7,5 +7,5 @@
 [edge-servers]
 10.0.0.43
 
-[clients-servers]
+[client-servers]
 10.0.0.101
