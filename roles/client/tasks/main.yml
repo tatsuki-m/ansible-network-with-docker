@@ -17,8 +17,8 @@
   lineinfile:
     dest: /etc/network/interfaces
     line: up route add -net {{ br_ip.internal12 }} netmask {{ netmask }} gw {{ ip_addr.edge.ifname1 }}
-  nofity:
-    - restart network with ifname0
+  notify:
+    restart network with ifname0
 
 - name: add other hosts to /etc/hosts
   blockinfile:
