@@ -18,12 +18,12 @@
       netmask {{ netmask }}
 
 - name: add route from edge-cloud to client
-    lineinfile:
-      dest: /etc/network/interfaces
-      line: up route add -net {{ br_ip.internal23 }} netmask {{ netmask }} gw {{ ip_addr.edge.ifname0 }}
-    notify:
-      restart network with ifname0
-      restart network with ifname1
+  lineinfile:
+    dest: /etc/network/interfaces
+    line: up route add -net {{ br_ip.internal23 }} netmask {{ netmask }} gw {{ ip_addr.edge.ifname0 }}
+  notify:
+    - restart network with ifname0
+    - restart network with ifname1
 
 - name: add other hosts to /etc/hosts
   blockinfile:
