@@ -1,0 +1,36 @@
+---
+- name: install required packages
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+    - zlib1g-dev
+    - libtool
+    - autoconf
+    - automake
+    - make
+    - cmake
+    - gcc-4.8
+    - g++-4.8
+    - libgoogle-glog-dev
+    - libgtest-dev
+    - sqlite3
+    - libpcap-dev
+    - libsqlite3-dev
+
+- name: correct g++ version
+  alternatives: name=g++ path=/usr/bin/g++4.8
+
+- name: install NEGI from github
+  git: repo=https://github.com/westlab/negi.git
+       dest={{ home_path }}
+
+- name: conmile NEGI
+  command: cmake .
+  args:
+    chdir: ./negi
+
+- name: build NEGI
+  command: cmake --build --targer negi -- -j 4
+  args:
+    chdir: ./negi
+
