@@ -1,4 +1,4 @@
 ---
-- name: reboot cloud
+- name: reboot client
   command: shutdown -r now
 

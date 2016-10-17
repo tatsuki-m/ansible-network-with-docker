@@ -1,0 +1,10 @@
+---
+# This playbook deploys the cloud server
+
+- name: edge servers
+  hosts: edge-servers
+  become: yes
+
+  roles:
+    - common
+    - edge

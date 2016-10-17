@@ -3,3 +3,9 @@
 
 [core-edge-servers]
 10.0.0.184
+
+[edge-servers]
+10.0.0.43
+
+[client-servers]
+10.0.0.101
