@@ -30,7 +30,7 @@ Module:
 
 
 ## Before start 
-You have to prepare following two things 
+You have to prepare following three
 - Connect bridge between VMs
 - Install python
 - Setting your virtual ip addrs to `hosts` file
