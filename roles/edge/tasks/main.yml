@@ -17,8 +17,7 @@
     dest: /etc/network/interfaces
     line: up route add -net {{ br_ip.internal01 }} netmask {{ netmask }} gw {{ ip_addr.core_edge.ifname1 }}
   notify:
-    - restart network with ifname0
-    - restart network with ifname1
+    - reboot edge 
 
 - name: add other hosts to /etc/hosts
   blockinfile:

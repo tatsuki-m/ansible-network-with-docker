@@ -18,7 +18,7 @@
     dest: /etc/network/interfaces
     line: up route add -net {{ br_ip.internal12 }} netmask {{ netmask }} gw {{ ip_addr.edge.ifname1 }}
   notify:
-    restart network with ifname0
+    reboot client
 
 - name: add other hosts to /etc/hosts
   blockinfile:
@@ -30,4 +30,6 @@
 
 - name: change hostname
   command: hostnamectl set-hostname client
+
+
 
