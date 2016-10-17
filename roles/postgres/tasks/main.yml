@@ -1,0 +1,14 @@
+---
+- name: install postgresql
+  apt: name={{ item }} state=latest
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - python-psycopg2
+
+- name: postgresql initdb
+  shell: service postgresql initdb
+
+- name: start postgresql
+  service: name=postgresql state=started enabled=yes
+
