@@ -1,5 +1,5 @@
 ---
-- name: insert bridge with ifname0 in /etc/network/interfaces
+- name: insert bridge with ifname0 and ifname1 in /etc/network/interfaces
   blockinfile:
     dest: /etc/network/interfaces
     content: |
@@ -7,11 +7,6 @@
       iface {{ ifname0 }} inet static
       address {{ ip_addr.edge.ifname0 }}
       netmask {{ netmask }}
-
-- name: insert bridge with ifname1 in /etc/network/interfaces
-  blockinfile:
-    dest: /etc/network/interfaces
-    content: |
       auto {{ ifname1 }}
       iface {{ ifname1 }} inet static
       address {{ ip_addr.edge.ifname1 }}
