@@ -1,6 +1,7 @@
 ---
-# homepath (you can change to accord with your username
+# homepath (you can change to accord with your username)
 home_path: /home/miura
+current_user: miura
 
 # network interface path
 net_cnf_path: /etc/network/interfaces
