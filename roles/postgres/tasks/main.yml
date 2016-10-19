@@ -18,7 +18,7 @@
     owner: root
     group: root
     mode: 0440
-    line: "{{ current_user}} ALL=(postgres) NOPASSWD: ALL"
+    line: "{{ current_user }} ALL=(postgres) NOPASSWD: ALL"
     state: present
     create: yes
     validate: 'visudo -cf %s'
