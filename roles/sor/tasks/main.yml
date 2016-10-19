@@ -33,15 +33,6 @@
   args:
     chdir: ./negi
 
-- name: make database for NEGI
-  postgresql_db:
-    name: "{{ dbname }}"
-    encoding: "UFT-8"
-    login_user: postgres
-    template: ./negi/template/scripts/negi.sql
-  become_user: postgres
-  become: yes
-
 - name: create user
   postgresql_user:
     db: "{{ dbname }}"
